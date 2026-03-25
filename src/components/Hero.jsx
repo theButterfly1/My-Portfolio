@@ -90,11 +90,11 @@ export default function Hero() {
             letterSpacing: '0.05em', textTransform: 'uppercase',
             transition: 'background 0.2s, transform 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(0)'; }}
           >
             View My Work
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 7h10M7 2l5 5-5 5" /></svg>
           </a>
           <a href={`mailto:${personal.email}`} style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -105,8 +105,8 @@ export default function Hero() {
             border: '1px solid var(--rule)',
             transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--rule)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--rule)'; e.currentTarget.style.color = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(0)'; }}
           >
             Get In Touch
           </a>
@@ -134,8 +134,8 @@ export default function Hero() {
       }} className="hero-stats">
         {[
           { n: '8+', l: 'Games' },
-          { n: '2+', l: 'Years' },
-          { n: '2', l: 'In Dev' },
+          { n: '3+', l: 'Years' },
+          { n: '3', l: 'In Dev' },
         ].map(s => (
           <div key={s.n} style={{ textAlign: 'center' }}>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', lineHeight: 1, color: 'var(--ink)' }}>{s.n}</div>

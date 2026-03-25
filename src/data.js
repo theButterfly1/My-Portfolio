@@ -16,8 +16,8 @@ export const about = {
   ],
   highlights: [
     { value: "8+", label: "Games Shipped" },
-    { value: "2+", label: "Years Experience" },
-    { value: "2", label: "Personal Projects" },
+    { value: "3+", label: "Years Experience" },
+    { value: "3", label: "Personal Projects" },
   ],
 };
 
@@ -104,7 +104,7 @@ export const games = [
   },
   {
     id: 9,
-    title: "Untitled Godot Project",
+    title: "Void",
     genre: "Personal Project",
     role: "Designer & Developer",
     description: "An original game built in Godot, currently in active development. Exploring narrative mechanics, environmental storytelling, and custom shaders.",
