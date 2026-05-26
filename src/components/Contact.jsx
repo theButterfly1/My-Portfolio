@@ -9,21 +9,53 @@ export default function Contact() {
   const copyEmail = () => {
     navigator.clipboard.writeText(personal.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2200);
   };
+
+  const ContactCard = ({ label, value, children }) => (
+    <div style={{
+      background: 'var(--paper-card)',
+      border: '1px solid var(--rule-hi)',
+      borderRadius: '6px', padding: '1.5rem 1.75rem',
+      display: 'flex', alignItems: 'center',
+      justifyContent: 'space-between', gap: '1rem',
+      transition: 'border-color 0.25s, box-shadow 0.25s',
+    }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(240,176,60,0.5)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(240,176,60,0.07)'; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--rule-hi)'; e.currentTarget.style.boxShadow = 'none'; }}
+    >
+      <div>
+        <div style={{ fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '5px', fontFamily: 'var(--font-mono)' }}>{label}</div>
+        <div style={{ fontSize: '0.95rem', color: 'var(--ink)', fontWeight: 400 }}>{value}</div>
+      </div>
+      {children}
+    </div>
+  );
 
   return (
     <section id="contact" ref={ref} style={{
-      padding: `var(--section-gap) 2rem`,
-      background: 'var(--paper-warm)',
+      width: '100%',
+      padding: `var(--section-gap) clamp(1.5rem, 5vw, 4rem)`,
+      background: 'var(--paper)',
       borderTop: '1px solid var(--rule)',
+      position: 'relative', overflow: 'hidden',
     }}>
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+      {/* Ambient glow */}
+      <div style={{
+        position: 'absolute', bottom: '10%', left: '5%',
+        width: '600px', height: '400px',
+        background: 'radial-gradient(ellipse, rgba(240,176,60,0.06) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', width: '100%', position: 'relative' }}>
 
         {/* Section label */}
         <div className="reveal" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '4rem' }}>
-          <span style={{ fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--ink-muted)', fontWeight: 500 }}>04 / Contact</span>
-          <div style={{ flex: 1, height: '1px', background: 'var(--rule)' }} />
+          <span style={{ fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 600, fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
+            04 / Contact
+          </span>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(240,176,60,0.4), var(--rule))' }} />
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'start' }} className="contact-grid">
@@ -33,126 +65,101 @@ export default function Contact() {
             <h2 className="reveal" style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1,
-              color: 'var(--ink)',
-              marginBottom: '1.5rem',
+              letterSpacing: '-0.03em', lineHeight: 1,
+              color: 'var(--ink)', marginBottom: '1.5rem',
             }}>
               Let's make<br />
-              <em style={{ color: 'var(--accent)', fontStyle: 'italic' }}>something great.</em>
+              <em style={{ color: 'var(--accent)', fontStyle: 'italic', textShadow: '0 0 50px rgba(240,176,60,0.35)' }}>
+                something great.
+              </em>
             </h2>
 
             <p className="reveal" style={{
-              fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-light)',
-              fontWeight: 300, maxWidth: '420px',
+              fontSize: '1rem', lineHeight: 1.75, color: 'var(--ink-light)',
+              fontWeight: 300, maxWidth: '400px', transitionDelay: '0.1s',
             }}>
-              Open to full-time game designer roles, contract work, and collaborations. If you're building something interesting, I'd love to hear about it.
+              Open to full-time game designer / game producer roles, contract work, and collaborations. If you're building something interesting, I'd love to hear about it.
             </p>
+
+            {/* Status badge */}
+            <div className="reveal" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+              marginTop: '2.5rem', padding: '0.6rem 1.2rem',
+              background: 'rgba(60,220,100,0.08)', border: '1px solid rgba(60,220,100,0.25)',
+              borderRadius: '100px', transitionDelay: '0.2s',
+            }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3cdc64', boxShadow: '0 0 8px #3cdc64', animation: 'pulse 2s infinite', flexShrink: 0 }} />
+              <span style={{ fontSize: '0.8rem', color: '#6eeaa0', fontWeight: 500 }}>
+                Currently <strong>open to opportunities</strong>
+              </span>
+            </div>
           </div>
 
-          {/* Right: contact details */}
+          {/* Right: contact cards */}
           <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
             {/* Email */}
-            <div style={{
-              background: 'white', border: '1px solid var(--rule)',
-              borderRadius: '3px', padding: '1.5rem 1.75rem',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              gap: '1rem',
-            }}>
-              <div>
-                <div style={{ fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-muted)', marginBottom: '4px' }}>Email</div>
-                <div style={{ fontSize: '0.95rem', color: 'var(--ink)', fontWeight: 400 }}>{personal.email}</div>
-              </div>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
-                <button onClick={copyEmail} title="Copy email" style={{
-                  background: copied ? 'var(--accent)' : 'var(--paper-mid)',
-                  color: copied ? 'white' : 'var(--ink)',
-                  border: 'none', borderRadius: '2px',
-                  padding: '0.5rem 0.75rem', cursor: 'pointer', fontSize: '0.7rem',
-                  fontFamily: 'var(--font-body)', fontWeight: 500,
-                  letterSpacing: '0.06em', textTransform: 'uppercase',
+            <ContactCard label="Email" value={personal.email}>
+              <div style={{ display: 'flex', gap: '0.6rem', flexShrink: 0 }}>
+                <button onClick={copyEmail} style={{
+                  background: copied ? 'var(--accent)' : 'rgba(255,255,255,0.06)',
+                  color: copied ? '#08080e' : 'var(--ink-light)',
+                  border: `1px solid ${copied ? 'var(--accent)' : 'var(--rule-hi)'}`,
+                  borderRadius: '3px', padding: '0.45rem 0.85rem',
+                  cursor: 'pointer', fontSize: '0.68rem',
+                  fontFamily: 'var(--font-body)', fontWeight: 600,
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
                   transition: 'all 0.2s',
                 }}>
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copied ? '✓ Copied' : 'Copy'}
                 </button>
                 <a href={`mailto:${personal.email}`} style={{
-                  background: 'var(--ink)', color: 'var(--paper)',
-                  borderRadius: '2px', padding: '0.5rem 0.75rem',
-                  fontSize: '0.7rem', fontWeight: 500,
-                  letterSpacing: '0.06em', textTransform: 'uppercase',
-                  transition: 'background 0.2s',
+                  background: 'var(--accent)', color: '#08080e',
+                  borderRadius: '3px', padding: '0.45rem 0.85rem',
+                  fontSize: '0.68rem', fontFamily: 'var(--font-body)', fontWeight: 700,
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  transition: 'all 0.2s',
+                  display: 'inline-flex', alignItems: 'center',
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = 'var(--accent)'}
-                onMouseLeave={e => e.currentTarget.style.background = 'var(--ink)'}
+                  onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1.12)'}
+                  onMouseLeave={e => e.currentTarget.style.filter = 'brightness(1)'}
                 >
                   Send
                 </a>
               </div>
-            </div>
+            </ContactCard>
 
             {/* LinkedIn */}
-            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" style={{
-              background: 'white', border: '1px solid var(--rule)',
-              borderRadius: '3px', padding: '1.5rem 1.75rem',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              gap: '1rem', transition: 'border-color 0.2s, transform 0.2s',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--rule)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              <div>
-                <div style={{ fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-muted)', marginBottom: '4px' }}>LinkedIn</div>
-                <div style={{ fontSize: '0.95rem', color: 'var(--ink)' }}>{personal.linkedinLabel}</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 11L11 1M11 1H4M11 1v7"/></svg>
-            </a>
+            <ContactCard label="LinkedIn" value={personal.linkedinLabel}>
+              <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" style={{
+                color: 'var(--accent)', flexShrink: 0, transition: 'transform 0.2s',
+              }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translate(2px,-2px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translate(0,0)'}
+              >
+                <svg width="18" height="18" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 11L11 1M11 1H4M11 1v7" /></svg>
+              </a>
+            </ContactCard>
 
             {/* Phone */}
-            <a href={`tel:${personal.phone}`} style={{
-              background: 'white', border: '1px solid var(--rule)',
-              borderRadius: '3px', padding: '1.5rem 1.75rem',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              gap: '1rem', transition: 'border-color 0.2s, transform 0.2s',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--ink)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--rule)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              <div>
-                <div style={{ fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-muted)', marginBottom: '4px' }}>Phone</div>
-                <div style={{ fontSize: '0.95rem', color: 'var(--ink)' }}>{personal.phone}</div>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.85 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 10.9a16 16 0 006.09 6.09l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            </a>
-
-            {/* Availability badge */}
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '0.6rem',
-              padding: '1rem 1.75rem',
-            }}>
-              <div style={{
-                width: '8px', height: '8px', borderRadius: '50%',
-                background: '#4caf50',
-                boxShadow: '0 0 0 3px rgba(76,175,80,0.2)',
-                animation: 'pulse 2s infinite',
-              }} />
-              <span style={{ fontSize: '0.8rem', color: 'var(--ink-light)', fontWeight: 400 }}>
-                Currently <strong style={{ color: 'var(--ink)' }}>open to opportunities</strong>
-              </span>
-            </div>
+            <ContactCard label="Phone" value={personal.phone}>
+              <a href={`tel:${personal.phone}`} style={{
+                color: 'var(--accent)', flexShrink: 0, transition: 'transform 0.2s',
+              }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translate(2px,-2px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translate(0,0)'}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z" /></svg>
+              </a>
+            </ContactCard>
           </div>
         </div>
       </div>
 
       <style>{`
         @keyframes pulse {
-          0%, 100% { box-shadow: 0 0 0 3px rgba(76,175,80,0.2); }
-          50% { box-shadow: 0 0 0 6px rgba(76,175,80,0.08); }
-        }
-        @media (max-width: 768px) {
-          .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          0%, 100% { opacity: 1; box-shadow: 0 0 8px #3cdc64; }
+          50% { opacity: 0.6; box-shadow: 0 0 16px #3cdc64; }
         }
       `}</style>
     </section>

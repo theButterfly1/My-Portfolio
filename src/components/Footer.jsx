@@ -4,9 +4,10 @@ import { personal } from '../data';
 export default function Footer() {
   return (
     <footer style={{
-      background: 'var(--ink)',
-      color: 'var(--paper)',
-      padding: '3rem 2rem',
+      width: '100%',
+      background: 'var(--paper-mid)',
+      borderTop: '1px solid var(--rule-hi)',
+      padding: `3rem clamp(1.5rem, 5vw, 4rem)`,
     }}>
       <div style={{
         maxWidth: 'var(--max-w)', margin: '0 auto',
@@ -14,10 +15,11 @@ export default function Footer() {
         flexWrap: 'wrap', gap: '1.5rem',
       }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', marginBottom: '0.4rem' }}>
-            {personal.name.split(' ')[0]}<span style={{ color: 'var(--accent)' }}>.</span>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', marginBottom: '0.3rem', color: 'var(--ink)' }}>
+            {personal.name.split(' ')[0]}
+            <span style={{ color: 'var(--accent)', textShadow: '0 0 12px rgba(240,176,60,0.5)' }}>.</span>
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: '0.7rem', color: 'var(--ink-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
             Game Designer
           </div>
         </div>
@@ -25,18 +27,18 @@ export default function Footer() {
         <nav style={{ display: 'flex', gap: '2rem' }}>
           {['#about', '#work', '#skills', '#contact'].map(href => (
             <a key={href} href={href} style={{
-              fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.45)', transition: 'color 0.2s',
+              fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: 'var(--ink-muted)', transition: 'color 0.2s',
             }}
-            onMouseEnter={e => e.currentTarget.style.color = 'white'}
-            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.45)'}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-muted)'}
             >
               {href.replace('#', '')}
             </a>
           ))}
         </nav>
 
-        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>
+        <div style={{ fontSize: '0.7rem', color: 'var(--ink-muted)', letterSpacing: '0.04em', fontFamily: 'var(--font-mono)' }}>
           © {new Date().getFullYear()} {personal.name}
         </div>
       </div>
